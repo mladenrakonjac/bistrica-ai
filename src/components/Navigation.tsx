@@ -74,7 +74,7 @@ export default function Navigation() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-border px-4 py-4 space-y-1">
+        <div className="md:hidden bg-white border-t border-border px-4 py-4 space-y-1 animate-slide-down">
           {navLinks.map((l) => (
             <Link
               key={l.href}

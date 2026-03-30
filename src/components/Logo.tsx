@@ -53,14 +53,16 @@ export default function Logo({ size = "md", inverted = false }: LogoProps) {
             d="M22 1.5 C22 1.5 4 20 4 33 C4 43.5 12 52 22 52 C32 52 40 43.5 40 33 C40 20 22 1.5 22 1.5Z"
             fill="url(#lg-shine)"
           />
-          {/* White arc — edge highlight along lower-left inner rim of drop */}
-          <path
-            d="M 9 34 Q 8 40 11 46"
-            stroke="white"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            fill="none"
-            opacity="0.85"
+          {/* Specular highlights — soft oval + hot spot for 3D drop effect */}
+          <ellipse
+            cx="16" cy="19" rx="4.5" ry="8.5"
+            fill="white" opacity="0.2"
+            transform="rotate(-20 16 19)"
+          />
+          <ellipse
+            cx="14" cy="13" rx="2.5" ry="4"
+            fill="white" opacity="0.5"
+            transform="rotate(-20 14 13)"
           />
         </g>
 

@@ -111,15 +111,15 @@ export default function UseCasesPage() {
       <section className="relative pt-32 pb-16 bg-background overflow-hidden">
         <div className="absolute inset-0 dot-grid pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Badge variant="outline" className="mb-6 font-semibold tracking-wide text-xs px-3 py-1.5">
+          <Badge variant="outline" className="mb-6 font-semibold tracking-wide text-xs px-3 py-1.5 animate-fade-in">
             Insurance AI Solutions
           </Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-5 animate-fade-in-up [animation-delay:80ms]">
             AI use cases built for
             <br />
             <span className="gradient-heading">insurance operations</span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed animate-fade-in-up [animation-delay:200ms]">
             Every use case here has been designed around real insurance workflows — not adapted from a generic AI template.
           </p>
         </div>

@@ -99,23 +99,23 @@ export default function HomePage() {
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
           <div className="max-w-3xl">
-            <Badge variant="outline" className="mb-8 font-semibold tracking-wide text-xs px-3 py-1.5">
+            <Badge variant="outline" className="mb-8 font-semibold tracking-wide text-xs px-3 py-1.5 animate-fade-in">
               Agentic & Generative AI · European Insurance
             </Badge>
 
-            <h1 className="text-[2.75rem] sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.04] tracking-tight mb-6 text-balance">
+            <h1 className="text-[2.75rem] sm:text-6xl lg:text-7xl font-black text-foreground leading-[1.04] tracking-tight mb-6 text-balance animate-fade-in-up [animation-delay:80ms]">
               Insurance AI
               <br />
               <span className="gradient-heading">that ships to production</span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10">
+            <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10 animate-fade-in-up [animation-delay:200ms]">
               Bistrica.AI builds production-grade Agentic AI for European
               insurers — claims automation, document intelligence, fraud
               detection, and underwriting pipelines.
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 animate-fade-in-up [animation-delay:320ms]">
               <Button asChild size="lg" className="rounded-xl font-semibold px-7 shadow-sm">
                 <Link href="/contact">
                   Start the conversation
@@ -129,11 +129,11 @@ export default function HomePage() {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-16 max-w-3xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-16 max-w-3xl animate-fade-in-up [animation-delay:480ms]">
             {stats.map((s) => (
-              <Card key={s.label} className="bg-white/70 backdrop-blur-sm">
+              <Card key={s.label} className="bg-white/70 backdrop-blur-sm hover:bg-white/90 hover:shadow-md transition-all duration-200">
                 <CardContent className="px-5 py-4">
-                  <p className="text-2xl sm:text-3xl font-black text-foreground tracking-tight mb-0.5">
+                  <p className="text-2xl sm:text-3xl font-black text-primary tracking-tight mb-0.5">
                     {s.value}
                   </p>
                   <p className="text-xs text-muted-foreground leading-snug">{s.label}</p>
@@ -168,18 +168,18 @@ export default function HomePage() {
             {useCases.map(({ title, description, tag, icon: Icon }) => (
               <Card
                 key={title}
-                className="bg-white hover:border-primary/40 hover:shadow-md transition-all duration-200 group"
+                className="bg-white hover:border-primary/40 hover:shadow-lg transition-all duration-200 group hover:-translate-y-1"
               >
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
-                    <div className="w-9 h-9 rounded-lg bg-primary/8 text-primary flex items-center justify-center group-hover:bg-primary/15 transition-colors">
+                    <div className="w-9 h-9 rounded-lg bg-primary/8 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-200">
                       <Icon className="w-5 h-5" />
                     </div>
                     <Badge variant="secondary" className="text-[11px] font-semibold">
                       {tag}
                     </Badge>
                   </div>
-                  <h3 className="font-bold text-[15px] text-foreground mb-2 leading-snug">
+                  <h3 className="font-bold text-[15px] text-foreground mb-2 leading-snug group-hover:text-primary transition-colors duration-200">
                     {title}
                   </h3>
                   <p className="text-[13px] text-muted-foreground leading-relaxed">

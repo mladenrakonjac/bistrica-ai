@@ -141,15 +141,15 @@ export default function AgenticLifecyclePage() {
       <section className="relative pt-32 pb-16 bg-background overflow-hidden">
         <div className="absolute inset-0 dot-grid pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Badge variant="outline" className="mb-6 font-semibold tracking-wide text-xs px-3 py-1.5">
+          <Badge variant="outline" className="mb-6 font-semibold tracking-wide text-xs px-3 py-1.5 animate-fade-in">
             Our Methodology
           </Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-5 animate-fade-in-up [animation-delay:80ms]">
             The Agentic AI
             <br />
             <span className="gradient-heading">Delivery Lifecycle</span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed animate-fade-in-up [animation-delay:200ms]">
             A structured, repeatable process for taking Agentic AI from business
             problem to production — without the typical AI project pitfalls.
           </p>

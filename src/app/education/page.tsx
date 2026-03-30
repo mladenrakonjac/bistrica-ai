@@ -41,15 +41,15 @@ export default function EducationPage() {
       <section className="relative pt-32 pb-16 bg-background overflow-hidden">
         <div className="absolute inset-0 dot-grid pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Badge variant="outline" className="mb-6 font-semibold tracking-wide text-xs px-3 py-1.5">
+          <Badge variant="outline" className="mb-6 font-semibold tracking-wide text-xs px-3 py-1.5 animate-fade-in">
             Knowledge Base
           </Badge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-5">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-foreground leading-tight mb-5 animate-fade-in-up [animation-delay:80ms]">
             Learn Agentic AI
             <br />
             <span className="gradient-heading">for Insurance</span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed animate-fade-in-up [animation-delay:200ms]">
             Practical education for insurance professionals and technology teams
             — from foundational concepts to production architecture decisions.
           </p>
