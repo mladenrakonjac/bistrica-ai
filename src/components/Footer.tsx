@@ -1,31 +1,33 @@
 import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import Logo from "@/components/Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand */}
-          <div className="md:col-span-2">
+    <footer className="bg-white border-t border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
+          {/* Brand col */}
+          <div className="md:col-span-4">
             <Logo size="md" />
-            <p className="text-deep-navy/60 text-sm leading-relaxed max-w-xs mt-4">
-              Helping European insurance organisations unlock the full potential
-              of Agentic and Generative AI — from strategy to production.
+            <p className="text-muted-foreground text-sm leading-relaxed mt-4 max-w-xs">
+              Helping European insurance organisations deploy production-grade
+              Agentic AI — from strategy to live systems.
             </p>
-            <div className="mt-4">
-              <span className="inline-flex items-center gap-1.5 text-xs text-deep-navy/40 bg-deep-navy/5 px-3 py-1.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                GDPR-aware · Europe-first
-              </span>
-            </div>
+            <Badge
+              variant="outline"
+              className="mt-5 text-xs border-border text-muted-foreground font-medium gap-1.5"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+              GDPR-aware · Europe-first
+            </Badge>
           </div>
 
-          {/* Solutions */}
-          <div>
-            <h4 className="text-deep-navy font-semibold text-sm mb-4">Solutions</h4>
-            <ul className="space-y-2">
+          {/* Nav cols */}
+          <div className="md:col-span-3 md:col-start-6">
+            <p className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4">Solutions</p>
+            <ul className="space-y-3">
               {[
                 ["Use Cases", "/use-cases"],
                 ["Agentic Lifecycle", "/agentic-lifecycle"],
@@ -33,7 +35,10 @@ export default function Footer() {
                 ["Get in Touch", "/contact"],
               ].map(([label, href]) => (
                 <li key={href}>
-                  <Link href={href} className="text-deep-navy/60 text-sm hover:text-royal-blue transition-colors">
+                  <Link
+                    href={href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-150"
+                  >
                     {label}
                   </Link>
                 </li>
@@ -41,27 +46,30 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Insurance Focus */}
-          <div>
-            <h4 className="text-deep-navy font-semibold text-sm mb-4">Insurance Focus</h4>
-            <ul className="space-y-2 text-deep-navy/60 text-sm">
-              {["Claim Processing", "Document OCR", "Fraud Detection", "Policy Analysis", "Risk Assessment", "Regulatory Compliance"].map((item) => (
-                <li key={item} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-sky-blue" />
-                  {item}
-                </li>
+          <div className="md:col-span-3">
+            <p className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4">Insurance Focus</p>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              {[
+                "Claim Processing",
+                "Document OCR",
+                "Fraud Detection",
+                "Underwriting",
+                "Risk Assessment",
+                "Compliance",
+              ].map((item) => (
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
         </div>
 
-        <Separator className="my-8" />
+        <Separator />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-deep-navy/40 text-sm">
-            &copy; {new Date().getFullYear()} Bistrica.AI. All rights reserved.
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6">
+          <p className="text-muted-foreground text-xs">
+            © {new Date().getFullYear()} Bistrica.AI. All rights reserved.
           </p>
-          <p className="text-deep-navy/30 text-xs">
+          <p className="text-muted-foreground/50 text-xs">
             Built for European insurance · GDPR compliant
           </p>
         </div>

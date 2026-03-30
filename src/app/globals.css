@@ -2,76 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap');
 
+/* ─── shadcn CSS tokens ──────────────────────────────────────────── */
 @layer base {
   :root {
-    /* Off-White #F7FAFC */
-    --background: 210 40% 98%;
-    --foreground: 215 56% 23%;        /* Deep Navy #1A365D */
+    --background:        210 40% 98%;     /* #F7FAFC  */
+    --foreground:        215 56% 23%;     /* #1A365D  */
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 56% 23%;
+    --card:              0 0% 100%;
+    --card-foreground:   215 56% 23%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 56% 23%;
+    --popover:           0 0% 100%;
+    --popover-foreground:215 56% 23%;
 
-    /* Primary = Royal Blue #2B6CB0 */
-    --primary: 213 61% 43%;
-    --primary-foreground: 0 0% 100%;
+    --primary:           213 61% 43%;     /* #2B6CB0 Royal Blue */
+    --primary-foreground:0 0% 100%;
 
-    /* Secondary = very light sky tint */
-    --secondary: 210 50% 94%;
+    --secondary:         210 50% 94%;
     --secondary-foreground: 215 56% 23%;
 
-    --muted: 210 30% 93%;
-    --muted-foreground: 215 30% 46%;
+    --muted:             210 30% 94%;
+    --muted-foreground:  215 25% 48%;
 
-    /* Accent = Sky Blue #63B3ED */
-    --accent: 210 78% 66%;
+    --accent:            210 78% 66%;     /* #63B3ED Sky Blue */
     --accent-foreground: 215 56% 23%;
 
-    --destructive: 0 84% 60%;
+    --destructive:       0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    /* Borders use a light navy tint */
-    --border: 215 30% 88%;
-    --input: 215 30% 88%;
-    --ring: 213 61% 43%;
+    --border:            215 25% 88%;
+    --input:             215 25% 88%;
+    --ring:              213 61% 43%;
 
     --radius: 0.5rem;
   }
 
-  * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html {
-    scroll-behavior: smooth;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Montserrat', system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-    background-color: hsl(210 78% 66% / 0.25);
-    color: hsl(215 56% 23%);
+    background: hsl(210 78% 66% / 0.25);
+  }
+
+  /* Make shadcn Input & Textarea look polished */
+  input, textarea, select {
+    font-family: inherit;
   }
 }
 
+/* ─── Dot grid utility ───────────────────────────────────────────── */
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .dot-grid {
+    background-image: radial-gradient(
+      circle,
+      hsl(213 61% 43% / 0.07) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 28px 28px;
   }
 
-  /* Dot grid for hero sections */
-  .dot-grid {
-    background-image: radial-gradient(circle, hsl(213 61% 43% / 0.08) 1px, transparent 1px);
-    background-size: 30px 30px;
+  .text-balance { text-wrap: balance; }
+
+  /* Gradient text utility */
+  .gradient-heading {
+    @apply bg-gradient-to-br from-deep-navy via-royal-blue to-sky-blue bg-clip-text text-transparent;
   }
 }
