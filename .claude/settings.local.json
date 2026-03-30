@@ -5,7 +5,9 @@
       "Bash(npm run:*)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m \"Initial commit: Bistrica.AI — Agentic AI for Insurance:*)"
+      "Bash(git commit -m \"Initial commit: Bistrica.AI — Agentic AI for Insurance:*)",
+      "Bash(gh repo:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

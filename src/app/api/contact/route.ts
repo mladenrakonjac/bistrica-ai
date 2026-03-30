@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function formatList(items: string[], other?: string): string {
   const all = [...(items || [])];
   if (other && other.trim()) all.push(`Other: ${other.trim()}`);
@@ -29,6 +27,7 @@ function section(title: string, rows: string): string {
 }
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
   try {
     const body = await req.json();
 
