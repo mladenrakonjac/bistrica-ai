@@ -7,7 +7,15 @@
       "Bash(git add:*)",
       "Bash(git commit -m \"Initial commit: Bistrica.AI — Agentic AI for Insurance:*)",
       "Bash(gh repo:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(vercel --yes)",
+      "Bash(vercel env:*)",
+      "Bash(npm install:*)",
+      "Bash(echo \"import { clsx, type ClassValue } from \"\"clsx\"\"; import { twMerge } from \"\"tailwind-merge\"\"; export function cn\\(...inputs: ClassValue[]\\) { return twMerge\\(clsx\\(inputs\\)\\); }\")",
+      "Bash(git push:*)"
     ]
+  },
+  "enabledPlugins": {
+    "vercel@claude-plugins-official": true
   }
 }
