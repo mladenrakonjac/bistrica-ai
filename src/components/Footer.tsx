@@ -75,9 +75,15 @@ export default function Footer() {
           <p className="text-muted-foreground text-xs">
             © {new Date().getFullYear()} Bistrica.AI. All rights reserved.
           </p>
-          <p className="text-muted-foreground/50 text-xs">
-            Built for European insurance · GDPR compliant
-          </p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="text-muted-foreground/60 text-xs hover:text-primary transition-colors duration-150">
+              Privacy Policy
+            </Link>
+            <span className="text-muted-foreground/30 text-xs">·</span>
+            <p className="text-muted-foreground/50 text-xs">
+              Built for European insurance · GDPR compliant
+            </p>
+          </div>
         </div>
       </div>
     </footer>

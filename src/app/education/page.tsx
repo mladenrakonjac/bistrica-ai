@@ -60,14 +60,17 @@ export default function EducationPage() {
       <section className="py-16 bg-white border-y border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xl font-bold text-foreground">Articles & Guides</h2>
-            <span className="text-muted-foreground text-sm">{articles.length} articles</span>
+            <div>
+              <h2 className="text-xl font-bold text-foreground">Articles & Guides</h2>
+              <p className="text-muted-foreground text-sm mt-1">Publishing {new Date().getFullYear()} — topics covered below</p>
+            </div>
+            <Badge variant="secondary" className="text-xs font-semibold">Coming soon</Badge>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {articles.map((article) => (
               <Card
                 key={article.title}
-                className="hover:border-primary/40 hover:shadow-md transition-all duration-200 group cursor-pointer hover:-translate-y-0.5"
+                className="transition-colors duration-150 opacity-90"
               >
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
@@ -76,7 +79,7 @@ export default function EducationPage() {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <h3 className="text-foreground font-bold text-base mb-2 leading-snug group-hover:text-primary transition-colors">
+                  <h3 className="text-foreground font-bold text-base mb-2 leading-snug">
                     {article.title}
                   </h3>
                   <p className="text-muted-foreground text-sm leading-relaxed mb-4">{article.description}</p>
