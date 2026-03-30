@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Badge } from "@/components/ui/badge";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
@@ -11,30 +12,30 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-12 overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-900 to-transparent" />
+      <section className="relative pt-32 pb-12 overflow-hidden bg-background">
+        <div className="absolute inset-0 dot-grid pointer-events-none" />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-300 text-xs font-medium mb-6">
+          <Badge
+            variant="outline"
+            className="mb-6 border-primary/30 text-primary bg-primary/5 font-semibold tracking-wide text-xs px-3 py-1.5"
+          >
             Qualification Form
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
+          </Badge>
+          <h1 className="text-4xl sm:text-5xl font-black text-foreground leading-tight mb-4">
             Tell us about your
             <br />
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
-              organisation & stack
-            </span>
+            <span className="gradient-heading">organisation & stack</span>
           </h1>
-          <p className="text-slate-400 text-base leading-relaxed max-w-xl mx-auto">
-            We don&apos;t do generic sales calls. Fill in this form and we&apos;ll review
-            your infrastructure, use case context, and AI maturity — then come
-            back with a specific, relevant perspective.
+          <p className="text-muted-foreground text-base leading-relaxed max-w-xl mx-auto">
+            We don&apos;t do generic sales calls. Fill in this form and we&apos;ll
+            review your infrastructure, use case context, and AI maturity —
+            then come back with a specific, relevant perspective.
           </p>
         </div>
       </section>
 
       {/* Form */}
-      <section className="py-12 pb-24">
+      <section className="pb-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <ContactForm />
         </div>

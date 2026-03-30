@@ -7,6 +7,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
@@ -57,7 +59,16 @@ const initialForm: FormData = {
   primaryUseCase: "", useCaseDescription: "", timeline: "", additionalContext: "",
 };
 
-function CheckboxGroup({ options, selected, onChange, otherValue, onOtherChange, otherPlaceholder }: {
+// ── Reusable sub-components ──────────────────────────────────────────────────
+
+function CheckboxGroup({
+  options,
+  selected,
+  onChange,
+  otherValue,
+  onOtherChange,
+  otherPlaceholder = "Other (specify)",
+}: {
   options: string[];
   selected: string[];
   onChange: (val: string[]) => void;
@@ -66,30 +77,41 @@ function CheckboxGroup({ options, selected, onChange, otherValue, onOtherChange,
   otherPlaceholder?: string;
 }) {
   const toggle = (opt: string) =>
-    onChange(selected.includes(opt) ? selected.filter((s) => s !== opt) : [...selected, opt]);
+    onChange(
+      selected.includes(opt)
+        ? selected.filter((s) => s !== opt)
+        : [...selected, opt]
+    );
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-3">
       {options.map((opt) => (
-        <label key={opt} className="flex items-center gap-3 cursor-pointer group" onClick={() => toggle(opt)}>
-          <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors shrink-0 ${selected.includes(opt) ? "bg-royal-blue border-royal-blue" : "border-border group-hover:border-royal-blue/50"}`}>
-            {selected.includes(opt) && (
-              <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-              </svg>
-            )}
-          </div>
-          <span className="text-deep-navy/80 text-sm">{opt}</span>
-        </label>
+        <div key={opt} className="flex items-center gap-3">
+          <Checkbox
+            id={opt}
+            checked={selected.includes(opt)}
+            onCheckedChange={() => toggle(opt)}
+          />
+          <Label htmlFor={opt} className="font-normal text-sm cursor-pointer">
+            {opt}
+          </Label>
+        </div>
       ))}
-      {onOtherChange && (
+
+      {onOtherChange !== undefined && (
         <div className="flex items-center gap-3">
-          <div className={`w-4 h-4 rounded border-2 shrink-0 ${otherValue ? "bg-royal-blue border-royal-blue" : "border-border"}`} />
+          <Checkbox
+            id={`other-${otherPlaceholder}`}
+            checked={!!otherValue}
+            onCheckedChange={(checked) => {
+              if (!checked) onOtherChange("");
+            }}
+          />
           <Input
-            value={otherValue || ""}
+            value={otherValue ?? ""}
             onChange={(e) => onOtherChange(e.target.value)}
-            placeholder={otherPlaceholder || "Other (specify)"}
-            className="h-8 text-sm border-0 border-b border-border rounded-none bg-transparent focus-visible:ring-0 focus-visible:border-royal-blue px-0"
+            placeholder={otherPlaceholder}
+            className="h-8 text-sm"
           />
         </div>
       )}
@@ -97,42 +119,84 @@ function CheckboxGroup({ options, selected, onChange, otherValue, onOtherChange,
   );
 }
 
-function FormSection({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
+function FormSection({
+  number,
+  title,
+  children,
+}: {
+  number: string;
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
-    <Card className="border-border shadow-sm">
+    <Card>
       <CardContent className="p-6 sm:p-8">
         <div className="flex items-center gap-3 mb-6">
-          <div className="w-8 h-8 rounded-lg bg-deep-navy flex items-center justify-center shrink-0">
-            <span className="text-white text-xs font-bold">{number}</span>
-          </div>
-          <h2 className="text-deep-navy font-bold text-lg">{title}</h2>
+          <Badge className="w-7 h-7 rounded-md flex items-center justify-center p-0 text-xs font-bold shrink-0">
+            {number}
+          </Badge>
+          <h2 className="font-bold text-lg text-foreground">{title}</h2>
         </div>
+        <Separator className="mb-6" />
         {children}
       </CardContent>
     </Card>
   );
 }
 
-function ToggleGroup({ options, value, onChange }: { options: { value: string; label: string }[]; value: string; onChange: (v: string) => void }) {
+function ToggleGroup({
+  options,
+  value,
+  onChange,
+}: {
+  options: { value: string; label: string }[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
   return (
     <div className="flex flex-wrap gap-2">
       {options.map((opt) => (
-        <button
+        <Button
           key={opt.value}
           type="button"
+          variant={value === opt.value ? "default" : "outline"}
+          size="sm"
           onClick={() => onChange(opt.value)}
-          className={`px-4 py-2 rounded-xl border text-sm font-medium transition-all duration-150 ${
-            value === opt.value
-              ? "bg-deep-navy border-deep-navy text-white"
-              : "border-border text-deep-navy/60 hover:border-royal-blue/40 hover:text-deep-navy"
-          }`}
+          className="rounded-lg"
         >
           {opt.label}
-        </button>
+        </Button>
       ))}
     </div>
   );
 }
+
+// ── Field wrapper ─────────────────────────────────────────────────────────────
+
+function Field({
+  label,
+  required,
+  hint,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  hint?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-2">
+      <Label className="text-sm font-semibold text-foreground">
+        {label}
+        {required && <span className="text-primary ml-1">*</span>}
+      </Label>
+      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+      {children}
+    </div>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
 
 export default function ContactForm() {
   const [form, setForm] = useState<FormData>(initialForm);
@@ -165,16 +229,23 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <Card className="border-green-200 bg-green-50">
+      <Card>
         <CardContent className="p-12 text-center">
-          <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg
+              className="w-7 h-7 text-primary"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
           </div>
-          <h2 className="text-2xl font-black text-deep-navy mb-3">Submission received</h2>
-          <p className="text-deep-navy/60 leading-relaxed max-w-md mx-auto">
-            Thank you. We&apos;ve received your qualification form and will review your infrastructure and use case context. Expect to hear from us within 2 business days.
+          <h2 className="text-2xl font-black text-foreground mb-3">Submission received</h2>
+          <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
+            Thank you. We&apos;ve received your qualification form and will review your
+            infrastructure and use case context. Expect to hear from us within 2 business days.
           </p>
         </CardContent>
       </Card>
@@ -183,64 +254,84 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      {/* Section 1: Contact */}
+
+      {/* 01 · Contact Details */}
       <FormSection number="01" title="Your Contact Details">
         <div className="grid sm:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="firstName">First name <span className="text-royal-blue">*</span></Label>
-            <Input id="firstName" value={form.firstName} onChange={(e) => set("firstName", e.target.value)} placeholder="Jane" required className="border-border focus-visible:ring-royal-blue" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="lastName">Last name <span className="text-royal-blue">*</span></Label>
-            <Input id="lastName" value={form.lastName} onChange={(e) => set("lastName", e.target.value)} placeholder="Smith" required className="border-border focus-visible:ring-royal-blue" />
-          </div>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-4 mt-4">
-          <div className="space-y-2">
-            <Label htmlFor="email">Work email <span className="text-royal-blue">*</span></Label>
-            <Input id="email" type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="jane@company.com" required className="border-border focus-visible:ring-royal-blue" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="company">Company / Organisation <span className="text-royal-blue">*</span></Label>
-            <Input id="company" value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Allianz, AXA, Lloyd's..." required className="border-border focus-visible:ring-royal-blue" />
-          </div>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-4 mt-4">
-          <div className="space-y-2">
-            <Label>Country (headquarters) <span className="text-royal-blue">*</span></Label>
+          <Field label="First name" required>
+            <Input
+              value={form.firstName}
+              onChange={(e) => set("firstName", e.target.value)}
+              placeholder="Jane"
+              required
+            />
+          </Field>
+          <Field label="Last name" required>
+            <Input
+              value={form.lastName}
+              onChange={(e) => set("lastName", e.target.value)}
+              placeholder="Smith"
+              required
+            />
+          </Field>
+          <Field label="Work email" required>
+            <Input
+              type="email"
+              value={form.email}
+              onChange={(e) => set("email", e.target.value)}
+              placeholder="jane@company.com"
+              required
+            />
+          </Field>
+          <Field label="Company / Organisation" required>
+            <Input
+              value={form.company}
+              onChange={(e) => set("company", e.target.value)}
+              placeholder="Allianz, AXA, Lloyd's..."
+              required
+            />
+          </Field>
+          <Field label="Country (headquarters)" required>
             <Select value={form.country} onValueChange={(v) => set("country", v)} required>
-              <SelectTrigger className="border-border focus:ring-royal-blue">
+              <SelectTrigger>
                 <SelectValue placeholder="Select country" />
               </SelectTrigger>
               <SelectContent>
-                {["Austria","Belgium","Croatia","Czech Republic","Denmark","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Luxembourg","Netherlands","Norway","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden","Switzerland","United Kingdom","Other European country","Outside Europe"].map((c) => (
-                  <SelectItem key={c} value={c}>{c}</SelectItem>
-                ))}
+                {[
+                  "Austria","Belgium","Croatia","Czech Republic","Denmark",
+                  "Finland","France","Germany","Greece","Hungary","Ireland",
+                  "Italy","Luxembourg","Netherlands","Norway","Poland",
+                  "Portugal","Romania","Slovakia","Slovenia","Spain",
+                  "Sweden","Switzerland","United Kingdom",
+                  "Other European country","Outside Europe",
+                ].map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
               </SelectContent>
             </Select>
-          </div>
-          <div className="space-y-2">
-            <Label>Your role <span className="text-royal-blue">*</span></Label>
+          </Field>
+          <Field label="Your role" required>
             <Select value={form.role} onValueChange={(v) => set("role", v)} required>
-              <SelectTrigger className="border-border focus:ring-royal-blue">
+              <SelectTrigger>
                 <SelectValue placeholder="Select your role" />
               </SelectTrigger>
               <SelectContent>
-                {["C-Suite / Executive","Chief Technology Officer","Chief Data Officer","VP / Director of Technology","VP / Director of Operations","Data Engineering Lead","AI / ML Engineering Lead","Enterprise Architect","Business Analyst","Product Manager","Consultant / Advisor","Other"].map((r) => (
-                  <SelectItem key={r} value={r}>{r}</SelectItem>
-                ))}
+                {[
+                  "C-Suite / Executive","Chief Technology Officer",
+                  "Chief Data Officer","VP / Director of Technology",
+                  "VP / Director of Operations","Data Engineering Lead",
+                  "AI / ML Engineering Lead","Enterprise Architect",
+                  "Business Analyst","Product Manager",
+                  "Consultant / Advisor","Other",
+                ].map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
               </SelectContent>
             </Select>
-          </div>
+          </Field>
         </div>
       </FormSection>
 
-      {/* Section 2: Cloud & Data */}
+      {/* 02 · Cloud & Data Infrastructure */}
       <FormSection number="02" title="Cloud & Data Infrastructure">
         <div className="space-y-6">
-          <div className="space-y-3">
-            <Label>Cloud provider(s) in use <span className="text-royal-blue">*</span></Label>
-            <p className="text-deep-navy/40 text-xs">Select all that apply</p>
+          <Field label="Cloud provider(s) in use" required hint="Select all that apply">
             <CheckboxGroup
               options={["Microsoft Azure","Amazon Web Services (AWS)","Google Cloud Platform (GCP)","On-premises / Private cloud","Hybrid"]}
               selected={form.cloudProvider}
@@ -249,10 +340,9 @@ export default function ContactForm() {
               onOtherChange={(v) => set("cloudProviderOther", v)}
               otherPlaceholder="Other cloud provider"
             />
-          </div>
-          <div className="space-y-3">
-            <Label>Data platform(s) <span className="text-royal-blue">*</span></Label>
-            <p className="text-deep-navy/40 text-xs">Select all that apply</p>
+          </Field>
+          <Separator />
+          <Field label="Data platform(s)" required hint="Select all that apply">
             <CheckboxGroup
               options={["Databricks","Snowflake","Microsoft Fabric","Azure Synapse","BigQuery","Redshift","Apache Spark (self-managed)","dbt Cloud"]}
               selected={form.dataPlatform}
@@ -261,11 +351,11 @@ export default function ContactForm() {
               onOtherChange={(v) => set("dataPlatformOther", v)}
               otherPlaceholder="Other data platform"
             />
-          </div>
-          <div className="space-y-2">
-            <Label>Where does your primary data reside? <span className="text-royal-blue">*</span></Label>
+          </Field>
+          <Separator />
+          <Field label="Where does your primary data reside?" required>
             <Select value={form.dataLocation} onValueChange={(v) => set("dataLocation", v)} required>
-              <SelectTrigger className="border-border focus:ring-royal-blue">
+              <SelectTrigger>
                 <SelectValue placeholder="Select data residency" />
               </SelectTrigger>
               <SelectContent>
@@ -277,36 +367,45 @@ export default function ContactForm() {
                 <SelectItem value="noneu">Outside EU</SelectItem>
               </SelectContent>
             </Select>
-          </div>
+          </Field>
           {form.dataLocation && (
-            <div className="space-y-2">
-              <Label htmlFor="dataLocationDetail">Data residency detail</Label>
-              <Input id="dataLocationDetail" value={form.dataLocationDetail} onChange={(e) => set("dataLocationDetail", e.target.value)} placeholder="e.g. Azure West Europe + Germany North" className="border-border focus-visible:ring-royal-blue" />
-            </div>
+            <Field label="Data residency detail">
+              <Input
+                value={form.dataLocationDetail}
+                onChange={(e) => set("dataLocationDetail", e.target.value)}
+                placeholder="e.g. Azure West Europe + Germany North"
+              />
+            </Field>
           )}
         </div>
       </FormSection>
 
-      {/* Section 3: AI Maturity */}
+      {/* 03 · AI & Agentic Maturity */}
       <FormSection number="03" title="AI & Agentic Maturity">
         <div className="space-y-6">
-          <div className="space-y-3">
-            <Label>Have you previously developed or deployed Agentic AI use cases? <span className="text-royal-blue">*</span></Label>
+          <Field label="Have you previously developed or deployed Agentic AI use cases?" required>
             <ToggleGroup
-              options={[{ value: "no", label: "No" }, { value: "poc", label: "PoC / Pilot only" }, { value: "yes", label: "Yes, in production" }]}
+              options={[
+                { value: "no",  label: "No" },
+                { value: "poc", label: "PoC / Pilot only" },
+                { value: "yes", label: "Yes — in production" },
+              ]}
               value={form.hasAgenticExperience}
               onChange={(v) => set("hasAgenticExperience", v)}
             />
-          </div>
+          </Field>
           {(form.hasAgenticExperience === "poc" || form.hasAgenticExperience === "yes") && (
-            <div className="space-y-2">
-              <Label htmlFor="agenticDesc">Briefly describe the use case(s)</Label>
-              <Textarea id="agenticDesc" value={form.agenticUseCaseDescription} onChange={(e) => set("agenticUseCaseDescription", e.target.value)} placeholder="e.g. We built a RAG system for policy Q&A using Azure OpenAI, deployed as a PoC with ~50 internal users..." rows={3} className="border-border focus-visible:ring-royal-blue resize-none" />
-            </div>
+            <Field label="Briefly describe the use case(s)">
+              <Textarea
+                value={form.agenticUseCaseDescription}
+                onChange={(e) => set("agenticUseCaseDescription", e.target.value)}
+                placeholder="e.g. We built a RAG system for policy Q&A using Azure OpenAI..."
+                rows={3}
+              />
+            </Field>
           )}
-          <div className="space-y-3">
-            <Label>AI / LLM models used or being evaluated</Label>
-            <p className="text-deep-navy/40 text-xs">Select all that apply</p>
+          <Separator />
+          <Field label="AI / LLM models used or being evaluated" hint="Select all that apply">
             <CheckboxGroup
               options={["OpenAI GPT-4o / GPT-4","Azure OpenAI Service","Anthropic Claude","Google Gemini","Meta Llama (open source)","Mistral","Amazon Bedrock models","No AI models yet"]}
               selected={form.aiModelsUsed}
@@ -315,16 +414,14 @@ export default function ContactForm() {
               onOtherChange={(v) => set("aiModelsOther", v)}
               otherPlaceholder="Other model(s)"
             />
-          </div>
+          </Field>
         </div>
       </FormSection>
 
-      {/* Section 4: Frameworks */}
+      {/* 04 · Frameworks, Observability & Deployment */}
       <FormSection number="04" title="Frameworks, Observability & Deployment">
         <div className="space-y-6">
-          <div className="space-y-3">
-            <Label>Orchestration / agent frameworks</Label>
-            <p className="text-deep-navy/40 text-xs">Select all that apply</p>
+          <Field label="Orchestration / agent frameworks" hint="Select all that apply">
             <CheckboxGroup
               options={["LangChain","LangGraph","AutoGen (Microsoft)","CrewAI","Semantic Kernel","Haystack","Custom / proprietary","None yet"]}
               selected={form.orchestrationFrameworks}
@@ -333,10 +430,9 @@ export default function ContactForm() {
               onOtherChange={(v) => set("orchestrationOther", v)}
               otherPlaceholder="Other framework(s)"
             />
-          </div>
-          <div className="space-y-3">
-            <Label>Observability & monitoring tools</Label>
-            <p className="text-deep-navy/40 text-xs">Select all that apply</p>
+          </Field>
+          <Separator />
+          <Field label="Observability & monitoring tools" hint="Select all that apply">
             <CheckboxGroup
               options={["LangSmith","LangFuse","Arize AI","Weights & Biases","MLflow","Datadog","Azure Monitor / Application Insights","AWS CloudWatch","OpenTelemetry (custom)","None yet"]}
               selected={form.observabilityTools}
@@ -345,10 +441,9 @@ export default function ContactForm() {
               onOtherChange={(v) => set("observabilityOther", v)}
               otherPlaceholder="Other observability tool(s)"
             />
-          </div>
-          <div className="space-y-3">
-            <Label>Infrastructure / deployment tooling</Label>
-            <p className="text-deep-navy/40 text-xs">Select all that apply</p>
+          </Field>
+          <Separator />
+          <Field label="Infrastructure / deployment tooling" hint="Select all that apply">
             <CheckboxGroup
               options={["Terraform","Bicep / ARM (Azure)","AWS CloudFormation / CDK","Pulumi","Kubernetes / AKS / EKS / GKE","Azure Container Apps","Azure Functions / AWS Lambda","GitHub Actions CI/CD","Azure DevOps","Docker Compose"]}
               selected={form.infraDeployment}
@@ -357,57 +452,79 @@ export default function ContactForm() {
               onOtherChange={(v) => set("infraDeploymentOther", v)}
               otherPlaceholder="Other deployment tooling"
             />
-          </div>
+          </Field>
         </div>
       </FormSection>
 
-      {/* Section 5: Use Case */}
+      {/* 05 · Primary Use Case */}
       <FormSection number="05" title="Your Primary Use Case">
         <div className="space-y-6">
-          <div className="space-y-2">
-            <Label>Primary use case <span className="text-royal-blue">*</span></Label>
+          <Field label="Primary use case" required>
             <Select value={form.primaryUseCase} onValueChange={(v) => set("primaryUseCase", v)} required>
-              <SelectTrigger className="border-border focus:ring-royal-blue">
+              <SelectTrigger>
                 <SelectValue placeholder="Select use case" />
               </SelectTrigger>
               <SelectContent>
-                {["Claim processing automation","Document extraction / OCR","Fraud detection","Underwriting automation","Customer-facing AI agent","Regulatory compliance automation","Policy analysis & comparison","Risk assessment pipelines","Internal knowledge management","Multiple / exploring options","Other"].map((uc) => (
-                  <SelectItem key={uc} value={uc}>{uc}</SelectItem>
-                ))}
+                {[
+                  "Claim processing automation","Document extraction / OCR",
+                  "Fraud detection","Underwriting automation",
+                  "Customer-facing AI agent","Regulatory compliance automation",
+                  "Policy analysis & comparison","Risk assessment pipelines",
+                  "Internal knowledge management","Multiple / exploring options","Other",
+                ].map((uc) => <SelectItem key={uc} value={uc}>{uc}</SelectItem>)}
               </SelectContent>
             </Select>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="ucDescription">Describe the use case and the problem you&apos;re trying to solve <span className="text-royal-blue">*</span></Label>
-            <Textarea id="ucDescription" value={form.useCaseDescription} onChange={(e) => set("useCaseDescription", e.target.value)} placeholder="e.g. We process ~5,000 motor claims per month. Currently each takes 3–5 days. We want to automate the initial triage and data extraction phase to get this to same-day settlement for straightforward claims..." rows={5} required className="border-border focus-visible:ring-royal-blue resize-none" />
-          </div>
-          <div className="space-y-3">
-            <Label>Expected timeline to get started <span className="text-royal-blue">*</span></Label>
+          </Field>
+          <Field label="Describe the use case and the problem you're trying to solve" required>
+            <Textarea
+              value={form.useCaseDescription}
+              onChange={(e) => set("useCaseDescription", e.target.value)}
+              placeholder="e.g. We process ~5,000 motor claims per month. Currently each takes 3–5 days. We want to automate the initial triage and data extraction phase..."
+              rows={5}
+              required
+            />
+          </Field>
+          <Field label="Expected timeline to get started" required>
             <ToggleGroup
-              options={[{ value: "now", label: "Immediately" }, { value: "q", label: "This quarter" }, { value: "h2", label: "Next 6 months" }, { value: "exploring", label: "Exploring" }]}
+              options={[
+                { value: "now",       label: "Immediately" },
+                { value: "q",         label: "This quarter" },
+                { value: "h2",        label: "Next 6 months" },
+                { value: "exploring", label: "Exploring" },
+              ]}
               value={form.timeline}
               onChange={(v) => set("timeline", v)}
             />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="additionalContext">Anything else we should know?</Label>
-            <Textarea id="additionalContext" value={form.additionalContext} onChange={(e) => set("additionalContext", e.target.value)} placeholder="Budget constraints, specific regulatory concerns, existing vendor relationships, team size, etc." rows={3} className="border-border focus-visible:ring-royal-blue resize-none" />
-          </div>
+          </Field>
+          <Separator />
+          <Field label="Anything else we should know?">
+            <Textarea
+              value={form.additionalContext}
+              onChange={(e) => set("additionalContext", e.target.value)}
+              placeholder="Budget constraints, regulatory concerns, existing vendor relationships, team size, etc."
+              rows={3}
+            />
+          </Field>
         </div>
       </FormSection>
 
       {/* Error */}
       {status === "error" && (
-        <div className="bg-red-50 border border-red-200 rounded-xl px-5 py-4 text-red-600 text-sm">
+        <p className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-4 py-3">
           {errorMessage || "Something went wrong. Please try again."}
-        </div>
+        </p>
       )}
 
       {/* Submit */}
-      <Button type="submit" disabled={status === "loading"} size="lg" className="w-full bg-deep-navy hover:bg-royal-blue text-white font-bold rounded-xl transition-all duration-200 py-6 text-base">
+      <Button
+        type="submit"
+        disabled={status === "loading"}
+        size="lg"
+        className="w-full rounded-xl font-bold py-6 text-base"
+      >
         {status === "loading" ? (
           <>
-            <svg className="animate-spin w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24">
+            <svg className="animate-spin w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
             </svg>
@@ -423,8 +540,8 @@ export default function ContactForm() {
         )}
       </Button>
 
-      <p className="text-center text-deep-navy/35 text-xs">
-        Your information is processed in accordance with GDPR. We will never sell or share your details with third parties.
+      <p className="text-center text-xs text-muted-foreground">
+        Your information is processed in accordance with GDPR. We will never sell or share your details.
       </p>
     </form>
   );
