@@ -12,7 +12,9 @@
       "Bash(vercel env:*)",
       "Bash(npm install:*)",
       "Bash(echo \"import { clsx, type ClassValue } from \"\"clsx\"\"; import { twMerge } from \"\"tailwind-merge\"\"; export function cn\\(...inputs: ClassValue[]\\) { return twMerge\\(clsx\\(inputs\\)\\); }\")",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(vercel --prod)",
+      "Bash(grep -i \"\\\\.\\(png\\\\|jpg\\\\|svg\\\\|webp\\)$\")"
     ]
   },
   "enabledPlugins": {

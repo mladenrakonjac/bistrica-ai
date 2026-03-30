@@ -6,36 +6,40 @@
 
 @layer base {
   :root {
-    /* shadcn CSS variables — light theme mapped to brand palette */
-    --background: 214 100% 98%;        /* #F7FAFC off-white */
-    --foreground: 215 53% 24%;         /* #1A365D deep navy */
+    /* Off-White #F7FAFC */
+    --background: 210 40% 98%;
+    --foreground: 215 56% 23%;        /* Deep Navy #1A365D */
 
     --card: 0 0% 100%;
-    --card-foreground: 215 53% 24%;
+    --card-foreground: 215 56% 23%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 53% 24%;
+    --popover-foreground: 215 56% 23%;
 
-    --primary: 215 60% 42%;            /* #2B6CB0 royal blue */
+    /* Primary = Royal Blue #2B6CB0 */
+    --primary: 213 61% 43%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 214 100% 95%;
-    --secondary-foreground: 215 53% 24%;
+    /* Secondary = very light sky tint */
+    --secondary: 210 50% 94%;
+    --secondary-foreground: 215 56% 23%;
 
-    --muted: 214 60% 94%;
-    --muted-foreground: 215 35% 45%;
+    --muted: 210 30% 93%;
+    --muted-foreground: 215 30% 46%;
 
-    --accent: 210 77% 67%;             /* #63B3ED sky blue */
-    --accent-foreground: 215 53% 24%;
+    /* Accent = Sky Blue #63B3ED */
+    --accent: 210 78% 66%;
+    --accent-foreground: 215 56% 23%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 50% 88%;
-    --input: 214 50% 88%;
-    --ring: 215 60% 42%;
+    /* Borders use a light navy tint */
+    --border: 215 30% 88%;
+    --input: 215 30% 88%;
+    --ring: 213 61% 43%;
 
-    --radius: 0.625rem;
+    --radius: 0.5rem;
   }
 
   * {
@@ -49,15 +53,14 @@
   }
 
   body {
-    background-color: #F7FAFC;
-    color: #1A365D;
+    @apply bg-background text-foreground;
     font-family: 'Montserrat', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-    background-color: rgba(99, 179, 237, 0.35);
-    color: #1A365D;
+    background-color: hsl(210 78% 66% / 0.25);
+    color: hsl(215 56% 23%);
   }
 }
 
@@ -66,9 +69,9 @@
     text-wrap: balance;
   }
 
-  /* Dot grid background for hero sections */
+  /* Dot grid for hero sections */
   .dot-grid {
-    background-image: radial-gradient(circle, rgba(43,108,176,0.10) 1px, transparent 1px);
-    background-size: 32px 32px;
+    background-image: radial-gradient(circle, hsl(213 61% 43% / 0.08) 1px, transparent 1px);
+    background-size: 30px 30px;
   }
 }
