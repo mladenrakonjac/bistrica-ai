@@ -17,16 +17,19 @@ export default function Footer() {
             </p>
             <Badge
               variant="outline"
-              className="mt-5 text-xs border-border text-muted-foreground font-medium gap-1.5"
+              className="mt-5 text-xs font-medium gap-1.5"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+              {/* CSS circle using ring/primary token */}
+              <span className="w-1.5 h-1.5 rounded-full bg-primary inline-block" />
               GDPR-aware · Europe-first
             </Badge>
           </div>
 
-          {/* Nav cols */}
+          {/* Solutions */}
           <div className="md:col-span-3 md:col-start-6">
-            <p className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4">Solutions</p>
+            <p className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4">
+              Solutions
+            </p>
             <ul className="space-y-3">
               {[
                 ["Use Cases", "/use-cases"],
@@ -46,8 +49,11 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Insurance Focus */}
           <div className="md:col-span-3">
-            <p className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4">Insurance Focus</p>
+            <p className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4">
+              Insurance Focus
+            </p>
             <ul className="space-y-3 text-sm text-muted-foreground">
               {[
                 "Claim Processing",

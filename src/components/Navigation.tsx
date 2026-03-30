@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Logo from "@/components/Logo";
@@ -59,19 +60,16 @@ export default function Navigation() {
           </div>
         </nav>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 text-foreground"
+        {/* Mobile toggle — shadcn Button with lucide icon */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="md:hidden"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Menu"
+          aria-label="Toggle menu"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
-            {mobileOpen
-              ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            }
-          </svg>
-        </button>
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </Button>
       </div>
 
       {/* Mobile menu */}
@@ -81,7 +79,11 @@ export default function Navigation() {
             <Link
               key={l.href}
               href={l.href}
-              className="block px-3 py-2.5 text-sm font-medium text-muted-foreground hover:text-foreground rounded-md hover:bg-muted/60 transition-colors"
+              className={`block px-3 py-2.5 text-sm font-medium rounded-md transition-colors ${
+                pathname === l.href
+                  ? "text-primary bg-primary/8"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+              }`}
             >
               {l.label}
             </Link>

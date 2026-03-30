@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -59,7 +60,7 @@ const initialForm: FormData = {
   primaryUseCase: "", useCaseDescription: "", timeline: "", additionalContext: "",
 };
 
-// ── Reusable sub-components ──────────────────────────────────────────────────
+// ── Sub-components ──────────────────────────────────────────────────────────
 
 function CheckboxGroup({
   options,
@@ -92,20 +93,17 @@ function CheckboxGroup({
             checked={selected.includes(opt)}
             onCheckedChange={() => toggle(opt)}
           />
-          <Label htmlFor={opt} className="font-normal text-sm cursor-pointer">
+          <Label htmlFor={opt} className="font-normal cursor-pointer">
             {opt}
           </Label>
         </div>
       ))}
-
       {onOtherChange !== undefined && (
         <div className="flex items-center gap-3">
           <Checkbox
             id={`other-${otherPlaceholder}`}
             checked={!!otherValue}
-            onCheckedChange={(checked) => {
-              if (!checked) onOtherChange("");
-            }}
+            onCheckedChange={(checked) => { if (!checked) onOtherChange(""); }}
           />
           <Input
             value={otherValue ?? ""}
@@ -119,20 +117,12 @@ function CheckboxGroup({
   );
 }
 
-function FormSection({
-  number,
-  title,
-  children,
-}: {
-  number: string;
-  title: string;
-  children: React.ReactNode;
-}) {
+function FormSection({ number, title, children }: { number: string; title: string; children: React.ReactNode }) {
   return (
     <Card>
       <CardContent className="p-6 sm:p-8">
-        <div className="flex items-center gap-3 mb-6">
-          <Badge className="w-7 h-7 rounded-md flex items-center justify-center p-0 text-xs font-bold shrink-0">
+        <div className="flex items-center gap-3 mb-4">
+          <Badge className="w-7 h-7 rounded-md p-0 flex items-center justify-center text-xs font-bold shrink-0">
             {number}
           </Badge>
           <h2 className="font-bold text-lg text-foreground">{title}</h2>
@@ -144,11 +134,7 @@ function FormSection({
   );
 }
 
-function ToggleGroup({
-  options,
-  value,
-  onChange,
-}: {
+function ToggleGroup({ options, value, onChange }: {
   options: { value: string; label: string }[];
   value: string;
   onChange: (v: string) => void;
@@ -171,14 +157,7 @@ function ToggleGroup({
   );
 }
 
-// ── Field wrapper ─────────────────────────────────────────────────────────────
-
-function Field({
-  label,
-  required,
-  hint,
-  children,
-}: {
+function Field({ label, required, hint, children }: {
   label: string;
   required?: boolean;
   hint?: string;
@@ -186,17 +165,17 @@ function Field({
 }) {
   return (
     <div className="space-y-2">
-      <Label className="text-sm font-semibold text-foreground">
+      <Label className="font-semibold">
         {label}
         {required && <span className="text-primary ml-1">*</span>}
       </Label>
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+      {hint && <p className="text-xs text-muted-foreground -mt-1">{hint}</p>}
       {children}
     </div>
   );
 }
 
-// ── Main component ────────────────────────────────────────────────────────────
+// ── Main ─────────────────────────────────────────────────────────────────────
 
 export default function ContactForm() {
   const [form, setForm] = useState<FormData>(initialForm);
@@ -232,15 +211,7 @@ export default function ContactForm() {
       <Card>
         <CardContent className="p-12 text-center">
           <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
-            <svg
-              className="w-7 h-7 text-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
+            <Check className="w-7 h-7 text-primary" />
           </div>
           <h2 className="text-2xl font-black text-foreground mb-3">Submission received</h2>
           <p className="text-muted-foreground leading-relaxed max-w-md mx-auto">
@@ -255,89 +226,52 @@ export default function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
 
-      {/* 01 · Contact Details */}
+      {/* 01 — Contact */}
       <FormSection number="01" title="Your Contact Details">
         <div className="grid sm:grid-cols-2 gap-4">
           <Field label="First name" required>
-            <Input
-              value={form.firstName}
-              onChange={(e) => set("firstName", e.target.value)}
-              placeholder="Jane"
-              required
-            />
+            <Input value={form.firstName} onChange={(e) => set("firstName", e.target.value)} placeholder="Jane" required />
           </Field>
           <Field label="Last name" required>
-            <Input
-              value={form.lastName}
-              onChange={(e) => set("lastName", e.target.value)}
-              placeholder="Smith"
-              required
-            />
+            <Input value={form.lastName} onChange={(e) => set("lastName", e.target.value)} placeholder="Smith" required />
           </Field>
           <Field label="Work email" required>
-            <Input
-              type="email"
-              value={form.email}
-              onChange={(e) => set("email", e.target.value)}
-              placeholder="jane@company.com"
-              required
-            />
+            <Input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="jane@company.com" required />
           </Field>
           <Field label="Company / Organisation" required>
-            <Input
-              value={form.company}
-              onChange={(e) => set("company", e.target.value)}
-              placeholder="Allianz, AXA, Lloyd's..."
-              required
-            />
+            <Input value={form.company} onChange={(e) => set("company", e.target.value)} placeholder="Allianz, AXA, Lloyd's..." required />
           </Field>
           <Field label="Country (headquarters)" required>
             <Select value={form.country} onValueChange={(v) => set("country", v)} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select country" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="Select country" /></SelectTrigger>
               <SelectContent>
-                {[
-                  "Austria","Belgium","Croatia","Czech Republic","Denmark",
-                  "Finland","France","Germany","Greece","Hungary","Ireland",
-                  "Italy","Luxembourg","Netherlands","Norway","Poland",
-                  "Portugal","Romania","Slovakia","Slovenia","Spain",
-                  "Sweden","Switzerland","United Kingdom",
-                  "Other European country","Outside Europe",
-                ].map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                {["Austria","Belgium","Croatia","Czech Republic","Denmark","Finland","France","Germany","Greece","Hungary","Ireland","Italy","Luxembourg","Netherlands","Norway","Poland","Portugal","Romania","Slovakia","Slovenia","Spain","Sweden","Switzerland","United Kingdom","Other European country","Outside Europe"].map((c) => (
+                  <SelectItem key={c} value={c}>{c}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </Field>
           <Field label="Your role" required>
             <Select value={form.role} onValueChange={(v) => set("role", v)} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select your role" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="Select your role" /></SelectTrigger>
               <SelectContent>
-                {[
-                  "C-Suite / Executive","Chief Technology Officer",
-                  "Chief Data Officer","VP / Director of Technology",
-                  "VP / Director of Operations","Data Engineering Lead",
-                  "AI / ML Engineering Lead","Enterprise Architect",
-                  "Business Analyst","Product Manager",
-                  "Consultant / Advisor","Other",
-                ].map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+                {["C-Suite / Executive","Chief Technology Officer","Chief Data Officer","VP / Director of Technology","VP / Director of Operations","Data Engineering Lead","AI / ML Engineering Lead","Enterprise Architect","Business Analyst","Product Manager","Consultant / Advisor","Other"].map((r) => (
+                  <SelectItem key={r} value={r}>{r}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </Field>
         </div>
       </FormSection>
 
-      {/* 02 · Cloud & Data Infrastructure */}
+      {/* 02 — Infrastructure */}
       <FormSection number="02" title="Cloud & Data Infrastructure">
         <div className="space-y-6">
           <Field label="Cloud provider(s) in use" required hint="Select all that apply">
             <CheckboxGroup
               options={["Microsoft Azure","Amazon Web Services (AWS)","Google Cloud Platform (GCP)","On-premises / Private cloud","Hybrid"]}
-              selected={form.cloudProvider}
-              onChange={(v) => set("cloudProvider", v)}
-              otherValue={form.cloudProviderOther}
-              onOtherChange={(v) => set("cloudProviderOther", v)}
+              selected={form.cloudProvider} onChange={(v) => set("cloudProvider", v)}
+              otherValue={form.cloudProviderOther} onOtherChange={(v) => set("cloudProviderOther", v)}
               otherPlaceholder="Other cloud provider"
             />
           </Field>
@@ -345,19 +279,15 @@ export default function ContactForm() {
           <Field label="Data platform(s)" required hint="Select all that apply">
             <CheckboxGroup
               options={["Databricks","Snowflake","Microsoft Fabric","Azure Synapse","BigQuery","Redshift","Apache Spark (self-managed)","dbt Cloud"]}
-              selected={form.dataPlatform}
-              onChange={(v) => set("dataPlatform", v)}
-              otherValue={form.dataPlatformOther}
-              onOtherChange={(v) => set("dataPlatformOther", v)}
+              selected={form.dataPlatform} onChange={(v) => set("dataPlatform", v)}
+              otherValue={form.dataPlatformOther} onOtherChange={(v) => set("dataPlatformOther", v)}
               otherPlaceholder="Other data platform"
             />
           </Field>
           <Separator />
           <Field label="Where does your primary data reside?" required>
             <Select value={form.dataLocation} onValueChange={(v) => set("dataLocation", v)} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select data residency" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="Select data residency" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="eu-single">Single EU region</SelectItem>
                 <SelectItem value="eu-multi">Multiple EU regions</SelectItem>
@@ -370,64 +300,46 @@ export default function ContactForm() {
           </Field>
           {form.dataLocation && (
             <Field label="Data residency detail">
-              <Input
-                value={form.dataLocationDetail}
-                onChange={(e) => set("dataLocationDetail", e.target.value)}
-                placeholder="e.g. Azure West Europe + Germany North"
-              />
+              <Input value={form.dataLocationDetail} onChange={(e) => set("dataLocationDetail", e.target.value)} placeholder="e.g. Azure West Europe + Germany North" />
             </Field>
           )}
         </div>
       </FormSection>
 
-      {/* 03 · AI & Agentic Maturity */}
+      {/* 03 — AI Maturity */}
       <FormSection number="03" title="AI & Agentic Maturity">
         <div className="space-y-6">
-          <Field label="Have you previously developed or deployed Agentic AI use cases?" required>
+          <Field label="Have you previously deployed Agentic AI use cases?" required>
             <ToggleGroup
-              options={[
-                { value: "no",  label: "No" },
-                { value: "poc", label: "PoC / Pilot only" },
-                { value: "yes", label: "Yes — in production" },
-              ]}
-              value={form.hasAgenticExperience}
-              onChange={(v) => set("hasAgenticExperience", v)}
+              options={[{ value: "no", label: "No" }, { value: "poc", label: "PoC / Pilot only" }, { value: "yes", label: "Yes — in production" }]}
+              value={form.hasAgenticExperience} onChange={(v) => set("hasAgenticExperience", v)}
             />
           </Field>
           {(form.hasAgenticExperience === "poc" || form.hasAgenticExperience === "yes") && (
             <Field label="Briefly describe the use case(s)">
-              <Textarea
-                value={form.agenticUseCaseDescription}
-                onChange={(e) => set("agenticUseCaseDescription", e.target.value)}
-                placeholder="e.g. We built a RAG system for policy Q&A using Azure OpenAI..."
-                rows={3}
-              />
+              <Textarea value={form.agenticUseCaseDescription} onChange={(e) => set("agenticUseCaseDescription", e.target.value)} placeholder="e.g. We built a RAG system for policy Q&A using Azure OpenAI..." rows={3} />
             </Field>
           )}
           <Separator />
           <Field label="AI / LLM models used or being evaluated" hint="Select all that apply">
             <CheckboxGroup
               options={["OpenAI GPT-4o / GPT-4","Azure OpenAI Service","Anthropic Claude","Google Gemini","Meta Llama (open source)","Mistral","Amazon Bedrock models","No AI models yet"]}
-              selected={form.aiModelsUsed}
-              onChange={(v) => set("aiModelsUsed", v)}
-              otherValue={form.aiModelsOther}
-              onOtherChange={(v) => set("aiModelsOther", v)}
+              selected={form.aiModelsUsed} onChange={(v) => set("aiModelsUsed", v)}
+              otherValue={form.aiModelsOther} onOtherChange={(v) => set("aiModelsOther", v)}
               otherPlaceholder="Other model(s)"
             />
           </Field>
         </div>
       </FormSection>
 
-      {/* 04 · Frameworks, Observability & Deployment */}
+      {/* 04 — Frameworks */}
       <FormSection number="04" title="Frameworks, Observability & Deployment">
         <div className="space-y-6">
           <Field label="Orchestration / agent frameworks" hint="Select all that apply">
             <CheckboxGroup
               options={["LangChain","LangGraph","AutoGen (Microsoft)","CrewAI","Semantic Kernel","Haystack","Custom / proprietary","None yet"]}
-              selected={form.orchestrationFrameworks}
-              onChange={(v) => set("orchestrationFrameworks", v)}
-              otherValue={form.orchestrationOther}
-              onOtherChange={(v) => set("orchestrationOther", v)}
+              selected={form.orchestrationFrameworks} onChange={(v) => set("orchestrationFrameworks", v)}
+              otherValue={form.orchestrationOther} onOtherChange={(v) => set("orchestrationOther", v)}
               otherPlaceholder="Other framework(s)"
             />
           </Field>
@@ -435,10 +347,8 @@ export default function ContactForm() {
           <Field label="Observability & monitoring tools" hint="Select all that apply">
             <CheckboxGroup
               options={["LangSmith","LangFuse","Arize AI","Weights & Biases","MLflow","Datadog","Azure Monitor / Application Insights","AWS CloudWatch","OpenTelemetry (custom)","None yet"]}
-              selected={form.observabilityTools}
-              onChange={(v) => set("observabilityTools", v)}
-              otherValue={form.observabilityOther}
-              onOtherChange={(v) => set("observabilityOther", v)}
+              selected={form.observabilityTools} onChange={(v) => set("observabilityTools", v)}
+              otherValue={form.observabilityOther} onOtherChange={(v) => set("observabilityOther", v)}
               otherPlaceholder="Other observability tool(s)"
             />
           </Field>
@@ -446,64 +356,39 @@ export default function ContactForm() {
           <Field label="Infrastructure / deployment tooling" hint="Select all that apply">
             <CheckboxGroup
               options={["Terraform","Bicep / ARM (Azure)","AWS CloudFormation / CDK","Pulumi","Kubernetes / AKS / EKS / GKE","Azure Container Apps","Azure Functions / AWS Lambda","GitHub Actions CI/CD","Azure DevOps","Docker Compose"]}
-              selected={form.infraDeployment}
-              onChange={(v) => set("infraDeployment", v)}
-              otherValue={form.infraDeploymentOther}
-              onOtherChange={(v) => set("infraDeploymentOther", v)}
+              selected={form.infraDeployment} onChange={(v) => set("infraDeployment", v)}
+              otherValue={form.infraDeploymentOther} onOtherChange={(v) => set("infraDeploymentOther", v)}
               otherPlaceholder="Other deployment tooling"
             />
           </Field>
         </div>
       </FormSection>
 
-      {/* 05 · Primary Use Case */}
+      {/* 05 — Use Case */}
       <FormSection number="05" title="Your Primary Use Case">
         <div className="space-y-6">
           <Field label="Primary use case" required>
             <Select value={form.primaryUseCase} onValueChange={(v) => set("primaryUseCase", v)} required>
-              <SelectTrigger>
-                <SelectValue placeholder="Select use case" />
-              </SelectTrigger>
+              <SelectTrigger><SelectValue placeholder="Select use case" /></SelectTrigger>
               <SelectContent>
-                {[
-                  "Claim processing automation","Document extraction / OCR",
-                  "Fraud detection","Underwriting automation",
-                  "Customer-facing AI agent","Regulatory compliance automation",
-                  "Policy analysis & comparison","Risk assessment pipelines",
-                  "Internal knowledge management","Multiple / exploring options","Other",
-                ].map((uc) => <SelectItem key={uc} value={uc}>{uc}</SelectItem>)}
+                {["Claim processing automation","Document extraction / OCR","Fraud detection","Underwriting automation","Customer-facing AI agent","Regulatory compliance automation","Policy analysis & comparison","Risk assessment pipelines","Internal knowledge management","Multiple / exploring options","Other"].map((uc) => (
+                  <SelectItem key={uc} value={uc}>{uc}</SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </Field>
           <Field label="Describe the use case and the problem you're trying to solve" required>
-            <Textarea
-              value={form.useCaseDescription}
-              onChange={(e) => set("useCaseDescription", e.target.value)}
-              placeholder="e.g. We process ~5,000 motor claims per month. Currently each takes 3–5 days. We want to automate the initial triage and data extraction phase..."
-              rows={5}
-              required
-            />
+            <Textarea value={form.useCaseDescription} onChange={(e) => set("useCaseDescription", e.target.value)} placeholder="e.g. We process ~5,000 motor claims per month. Currently each takes 3–5 days. We want to automate the initial triage and data extraction phase..." rows={5} required />
           </Field>
           <Field label="Expected timeline to get started" required>
             <ToggleGroup
-              options={[
-                { value: "now",       label: "Immediately" },
-                { value: "q",         label: "This quarter" },
-                { value: "h2",        label: "Next 6 months" },
-                { value: "exploring", label: "Exploring" },
-              ]}
-              value={form.timeline}
-              onChange={(v) => set("timeline", v)}
+              options={[{ value: "now", label: "Immediately" }, { value: "q", label: "This quarter" }, { value: "h2", label: "Next 6 months" }, { value: "exploring", label: "Exploring" }]}
+              value={form.timeline} onChange={(v) => set("timeline", v)}
             />
           </Field>
           <Separator />
           <Field label="Anything else we should know?">
-            <Textarea
-              value={form.additionalContext}
-              onChange={(e) => set("additionalContext", e.target.value)}
-              placeholder="Budget constraints, regulatory concerns, existing vendor relationships, team size, etc."
-              rows={3}
-            />
+            <Textarea value={form.additionalContext} onChange={(e) => set("additionalContext", e.target.value)} placeholder="Budget constraints, regulatory concerns, existing vendor relationships, team size, etc." rows={3} />
           </Field>
         </div>
       </FormSection>
@@ -516,26 +401,16 @@ export default function ContactForm() {
       )}
 
       {/* Submit */}
-      <Button
-        type="submit"
-        disabled={status === "loading"}
-        size="lg"
-        className="w-full rounded-xl font-bold py-6 text-base"
-      >
+      <Button type="submit" disabled={status === "loading"} size="lg" className="w-full rounded-xl font-bold py-6 text-base">
         {status === "loading" ? (
           <>
-            <svg className="animate-spin w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
+            <Loader2 className="w-4 h-4 animate-spin" />
             Submitting...
           </>
         ) : (
           <>
             Submit qualification form
-            <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
+            <ArrowRight className="w-4 h-4" />
           </>
         )}
       </Button>

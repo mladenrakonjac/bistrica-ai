@@ -53,14 +53,14 @@ export default function Logo({ size = "md", inverted = false }: LogoProps) {
             d="M22 1.5 C22 1.5 4 20 4 33 C4 43.5 12 52 22 52 C32 52 40 43.5 40 33 C40 20 22 1.5 22 1.5Z"
             fill="url(#lg-shine)"
           />
-          {/* White arc — the bracket/handle detail from the original logo */}
+          {/* White arc — edge highlight along lower-left inner rim of drop */}
           <path
-            d="M14 42 Q18 37.5 22 42"
+            d="M 9 34 Q 8 40 11 46"
             stroke="white"
-            strokeWidth="3"
+            strokeWidth="2.5"
             strokeLinecap="round"
             fill="none"
-            opacity="0.9"
+            opacity="0.85"
           />
         </g>
 
