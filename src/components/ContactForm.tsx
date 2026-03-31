@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useId } from "react";
+import React from "react";
 import { ArrowRight, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -163,14 +164,20 @@ function Field({ label, required, hint, children }: {
   hint?: string;
   children: React.ReactNode;
 }) {
+  const fieldId = useId();
+  // Inject id into direct Input/Textarea children for proper label association
+  const child = React.isValidElement(children)
+    ? React.cloneElement(children as React.ReactElement<{ id?: string }>, { id: fieldId })
+    : children;
+
   return (
     <div className="space-y-2">
-      <Label className="font-semibold">
+      <Label htmlFor={fieldId} className="font-semibold">
         {label}
-        {required && <span className="text-primary ml-1">*</span>}
+        {required && <span className="text-primary ml-1" aria-hidden="true">*</span>}
       </Label>
       {hint && <p className="text-xs text-muted-foreground -mt-1">{hint}</p>}
-      {children}
+      {child}
     </div>
   );
 }
