@@ -6,9 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: "Use Cases — Bistrica.AI",
+  title: "Use Cases | Bistrica.AI",
   description:
-    "Discover how Agentic AI transforms insurance operations — claim processing, OCR, fraud detection, underwriting, and more.",
+    "Discover how Agentic AI transforms insurance operations: claim processing, OCR, fraud detection, underwriting, and more.",
 };
 
 const useCases = [
@@ -16,7 +16,7 @@ const useCases = [
     id: "claims",
     tag: "Core Use Case",
     title: "Automated Claim Processing",
-    headline: "From first notice to settlement — autonomously",
+    headline: "From first notice to settlement, autonomously",
     description:
       "Traditional claim processing is slow, expensive, and inconsistent. Agentic AI orchestrates the full workflow: validates the policy, extracts data from submitted documents, cross-references coverage terms, calculates payout eligibility, and escalates to a human only when the case falls outside confidence thresholds.",
     outcomes: [
@@ -31,12 +31,12 @@ const useCases = [
     id: "ocr",
     tag: "Document Intelligence",
     title: "OCR & Document Extraction",
-    headline: "Structure any insurance document — at scale",
+    headline: "Structure any insurance document, at scale",
     description:
-      "Policies, damage reports, medical records, invoices, ID documents — insurance generates massive volumes of unstructured data. Our document intelligence pipeline uses vision-language models to extract structured data from any format, in any European language, with confidence scoring and validation against business rules.",
+      "Policies, damage reports, medical records, invoices, ID documents: insurance generates massive volumes of unstructured data. Our document intelligence pipeline uses vision-language models to extract structured data from any format, in any European language, with confidence scoring and validation against business rules.",
     outcomes: [
       "94%+ extraction accuracy across document types",
-      "Multi-language support — DE, FR, IT, ES, PL, and more",
+      "Multi-language support: DE, FR, IT, ES, PL, and more",
       "Structured output directly into your data platform",
       "Human review queue for low-confidence extractions",
     ],
@@ -48,7 +48,7 @@ const useCases = [
     title: "Fraud Detection",
     headline: "Identify suspicious patterns before payout",
     description:
-      "AI agents operating on graph-structured data identify entity relationships, cross-reference claim history, detect duplicate submissions, and flag anomalies in real time — before authorisation. Unlike rule-based systems, agentic fraud detection adapts to new patterns without manual rule updates.",
+      "AI agents operating on graph-structured data identify entity relationships, cross-reference claim history, detect duplicate submissions, and flag anomalies in real time, before authorisation. Unlike rule-based systems, agentic fraud detection adapts to new patterns without manual rule updates.",
     outcomes: [
       "Real-time fraud scoring at claim intake",
       "Graph-based entity resolution across claims and policies",
@@ -63,12 +63,12 @@ const useCases = [
     title: "Underwriting & Risk Pipelines",
     headline: "AI-assisted decisions in seconds, not days",
     description:
-      "AI pipelines automate data enrichment, compute risk scores, generate policy comparison summaries, and surface recommendations to underwriters — dramatically reducing the time from application to quote while improving consistency.",
+      "AI pipelines automate data enrichment, compute risk scores, generate policy comparison summaries, and surface recommendations to underwriters, dramatically reducing the time from application to quote while improving consistency.",
     outcomes: [
       "Automated data enrichment from internal and external sources",
       "Standardised risk scoring across product lines",
       "AI-generated underwriting summaries for complex cases",
-      "Full traceability — every score, every data source",
+      "Full traceability: every score, every data source",
     ],
     stack: ["Data enrichment pipelines", "Scoring models", "LLM summarisation", "Policy management APIs"],
   },
@@ -76,13 +76,14 @@ const useCases = [
     id: "compliance",
     tag: "Governance",
     title: "Regulatory Compliance Automation",
-    headline: "GDPR, Solvency II, IDD — automated and auditable",
+    headline: "GDPR, Solvency II, IDD and EU AI Act: automated and auditable",
     description:
-      "AI agents perform ongoing compliance checks against GDPR data handling requirements, Solvency II reporting obligations, and IDD documentation standards — generating audit-ready reports and flagging deviations before they become regulatory findings.",
+      "AI agents perform ongoing compliance checks against GDPR data handling requirements, Solvency II reporting obligations, IDD documentation standards, and EU AI Act high-risk AI system obligations, generating audit-ready reports and flagging deviations before they become regulatory findings.",
     outcomes: [
       "Automated compliance checks embedded in existing workflows",
       "GDPR-aware data handling throughout the pipeline",
       "Solvency II data quality and reporting automation",
+      "EU AI Act high-risk AI system documentation and logging",
       "Audit trail generation for regulatory submissions",
     ],
     stack: ["Policy-as-code", "Compliance rule engine", "Automated reporting", "Data lineage tracking"],
@@ -93,7 +94,7 @@ const useCases = [
     title: "Customer-Facing AI Agents",
     headline: "24/7 service across all European languages",
     description:
-      "Intelligent agents handle claims status, coverage queries, policy changes, and first notice of loss at scale — in any EU language — routing to human agents only when genuinely needed.",
+      "Intelligent agents handle claims status, coverage queries, policy changes, and first notice of loss at scale, in any EU language, routing to human agents only when genuinely needed.",
     outcomes: [
       "First-notice-of-loss capture without human involvement",
       "Multi-language support across all EU member languages",
@@ -120,7 +121,7 @@ export default function UseCasesPage() {
             <span className="gradient-heading">insurance operations</span>
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed animate-fade-in-up [animation-delay:200ms]">
-            Every use case here has been designed around real insurance workflows — not adapted from a generic AI template.
+            Every use case here has been designed around real insurance workflows, not adapted from a generic AI template.
           </p>
         </div>
       </section>
@@ -186,7 +187,7 @@ export default function UseCasesPage() {
             Have a specific use case in mind?
           </h2>
           <p className="text-muted-foreground text-lg mb-8">
-            Tell us about your infrastructure, your data, and your challenge — we&apos;ll come back with a concrete approach.
+            Tell us about your infrastructure, your data, and your challenge. We&apos;ll come back with a concrete approach.
           </p>
           <Button asChild size="lg" className="rounded-xl font-semibold px-8">
             <Link href="/contact">

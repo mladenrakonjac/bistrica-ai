@@ -13,7 +13,7 @@ export default function Footer() {
             <Logo size="md" />
             <p className="text-muted-foreground text-sm leading-relaxed mt-4 max-w-xs">
               Helping European insurance organisations deploy production-grade
-              Agentic AI — from strategy to live systems.
+              Agentic AI, from strategy to live systems.
             </p>
             <Badge
               variant="outline"

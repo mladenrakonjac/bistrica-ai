@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
 const stats = [
-  { value: "60%", label: "Claim processing time reduction" },
+  { value: "60-70%", label: "Claim processing time reduction" },
   { value: "94%", label: "Document extraction accuracy" },
   { value: "3×",  label: "Faster underwriter decisions" },
   { value: "€M+", label: "Fraud losses prevented annually" },
@@ -31,35 +31,35 @@ const useCases = [
   {
     title: "Document Intelligence & OCR",
     description:
-      "Extract structured fields from policies, damage reports, medical records, and invoices — any format, any European language.",
+      "Extract structured fields from policies, damage reports, medical records, and invoices: any format, any European language.",
     tag: "High ROI",
     icon: Files,
   },
   {
     title: "Fraud Detection",
     description:
-      "Graph-based agents cross-reference entities, flag duplicate submissions, and score anomaly risk in real time — before payout authorisation.",
+      "Graph-based agents cross-reference entities, flag duplicate submissions, and score anomaly risk in real time, before payout authorisation.",
     tag: "Risk Reduction",
     icon: ShieldAlert,
   },
   {
     title: "Underwriting Pipelines",
     description:
-      "Automated data enrichment, risk scoring, and policy comparison — giving underwriters AI-assisted decisions in seconds, not days.",
+      "Automated data enrichment, risk scoring, and policy comparison, giving underwriters AI-assisted decisions in seconds, not days.",
     tag: "Efficiency",
     icon: BarChart3,
   },
   {
     title: "Regulatory Compliance",
     description:
-      "Automated GDPR, Solvency II, and IDD compliance checks with audit-trail generation — embedded into existing policy workflows.",
+      "Automated GDPR, Solvency II, and IDD compliance checks with audit-trail generation, embedded into existing policy workflows.",
     tag: "Governance",
     icon: ShieldCheck,
   },
   {
     title: "Customer-Facing AI Agents",
     description:
-      "24/7 self-service for claims status, policy queries, and FNOL — in any EU language, with seamless handoff when human touch is needed.",
+      "24/7 self-service for claims status, policy queries, and FNOL, in any EU language, with seamless handoff when human touch is needed.",
     tag: "CX",
     icon: MessageCircle,
   },
@@ -69,12 +69,12 @@ const differentiators = [
   {
     number: "01",
     title: "Insurance Domain Depth",
-    body: "Every solution is built around insurance data structures, workflow logic, and regulatory obligations — not adapted from a horizontal AI template.",
+    body: "Every solution is built around insurance data structures, workflow logic, and regulatory obligations. Not adapted from a horizontal AI template.",
   },
   {
     number: "02",
     title: "Cloud & Stack Agnostic",
-    body: "Azure, AWS, GCP. Databricks, Snowflake, Fabric. We fit the architecture around your existing infrastructure — no forced migrations.",
+    body: "Azure, AWS, GCP. Databricks, Snowflake, Fabric. We fit the architecture around your existing infrastructure, with no forced migrations.",
   },
   {
     number: "03",
@@ -84,7 +84,7 @@ const differentiators = [
   {
     number: "04",
     title: "European Regulatory Mindset",
-    body: "GDPR, Solvency II, IDD — compliance requirements are first-class constraints, not project afterthoughts.",
+    body: "GDPR, Solvency II, IDD and the EU AI Act: compliance requirements are first-class constraints, not project afterthoughts.",
   },
 ];
 
@@ -111,7 +111,7 @@ export default function HomePage() {
 
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mb-10 animate-fade-in-up [animation-delay:200ms]">
               Bistrica.AI builds production-grade Agentic AI for European
-              insurers — claims automation, document intelligence, fraud
+              insurers: claims automation, document intelligence, fraud
               detection, and underwriting pipelines.
             </p>
 
@@ -250,7 +250,7 @@ export default function HomePage() {
           </h2>
           <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
             Complete our qualification form and we&apos;ll review your stack, use
-            case, and readiness — then schedule a focused technical call.
+            case, and readiness, then schedule a focused technical call.
           </p>
           <Button
             asChild

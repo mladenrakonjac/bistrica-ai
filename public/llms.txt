@@ -1,0 +1,51 @@
+# Bistrica.AI
+
+> Bistrica.AI helps European insurance organisations deploy production-grade Agentic AI systems, from strategy to live production.
+> Named after the Bistrica river in Montenegro: clear, fast, and transparent — qualities that matter most when AI makes decisions.
+
+## What we do
+
+Bistrica.AI designs, builds, and operates Agentic AI systems for European insurers.
+
+### Core solutions
+
+- **Claim Processing Automation** — 60-70% reduction in handling time; end-to-end from first notice to settlement with configurable human-in-the-loop
+- **Document Intelligence and OCR** — 94%+ extraction accuracy across all document types in any EU language (DE, FR, IT, ES, PL and more)
+- **Fraud Detection** — graph-based agents detect duplicate submissions and anomalies in real time before authorisation
+- **Underwriting and Risk Pipelines** — automated data enrichment, risk scoring, and AI-generated summaries for underwriters
+- **Regulatory Compliance Automation** — GDPR, Solvency II, IDD and EU AI Act compliance checks with full audit trail
+- **Customer-Facing AI Agents** — 24/7 self-service in all EU languages with seamless human escalation
+
+## Delivery methodology (Agentic Lifecycle)
+
+1. **Discover and Define** (Weeks 1-2): stakeholder interviews, workflow mapping, data assessment, scope definition, ROI framing
+2. **Architect and Design** (Weeks 2-4): agent topology, LLM selection, integration mapping, human-in-the-loop design, observability architecture
+3. **Build and Evaluate** (Weeks 4-10): agent development, prompt engineering, evaluation harness, integration build, failure mode testing
+4. **Deploy and Govern** (Weeks 10-14): staged rollout, observability configuration, guardrail implementation, runbook creation
+5. **Monitor and Improve** (Ongoing): drift detection, feedback loops, cost optimisation, periodic re-evaluation
+
+## Guiding principles
+
+- Human-in-the-loop by design: every agent has explicit escalation boundaries
+- Fit-to-stack: works with your existing Azure, AWS, or GCP infrastructure and Databricks, Snowflake, or Fabric data platform
+- Evaluation before deployment: tested against real insurance data and adversarial scenarios
+- Full observability: traces, metrics, latency, token cost, and alerting from day one
+- Regulatory defensibility: GDPR, Solvency II, IDD and EU AI Act compliant by design
+
+## Regulatory context (March 2026)
+
+- **GDPR**: personal data minimisation, right to explanation, human oversight of automated decisions
+- **Solvency II**: data quality, model governance, and risk reporting requirements
+- **IDD**: documentation and transparency obligations for insurance distribution
+- **EU AI Act**: insurance AI systems are classified as high-risk (Annex III). Full obligations apply from August 2026. Requirements include risk management systems, data governance, transparency, human oversight, and logging.
+
+## Technology stack compatibility
+
+Cloud: Microsoft Azure, Amazon Web Services, Google Cloud Platform, on-premises
+Data platforms: Databricks, Snowflake, Microsoft Fabric, Azure Synapse, BigQuery
+Agent frameworks: LangGraph, AutoGen, CrewAI, Semantic Kernel, Haystack, custom
+LLM providers: Azure OpenAI, Anthropic Claude, Google Gemini, Meta Llama, Mistral, Amazon Bedrock
+
+## Contact
+
+Qualification form: https://bistricaai.vercel.app/contact

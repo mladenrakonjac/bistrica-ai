@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Bistrica.AI — Agentic AI for European Insurance";
+export const alt = "Bistrica.AI: Agentic AI for European Insurance";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -132,7 +132,7 @@ export default function OGImage() {
               fontStyle: "italic",
             }}
           >
-            Clear · Fast · Production-ready — like the river it&apos;s named after
+            Clear · Fast · Production-ready, like the river it&apos;s named after
           </span>
         </div>
 

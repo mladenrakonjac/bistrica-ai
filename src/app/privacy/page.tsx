@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Bistrica.AI",
+  title: "Privacy Policy | Bistrica.AI",
   description: "How Bistrica.AI collects, processes, and protects personal data in accordance with GDPR.",
   robots: { index: false, follow: false },
 };

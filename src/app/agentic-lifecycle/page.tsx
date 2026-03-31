@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
-  title: "Agentic Lifecycle — Bistrica.AI",
+  title: "Agentic Lifecycle | Bistrica.AI",
   description:
     "How we design, build, deploy, and govern production Agentic AI systems for European insurance organisations.",
 };
@@ -19,9 +19,9 @@ const phases = [
     colorClass: "bg-foreground",
     duration: "Weeks 1–2",
     description:
-      "Before writing a single line of code, we map your existing landscape. This phase ensures the agent we build solves the right problem — not the most technically interesting one.",
+      "Before writing a single line of code, we map your existing landscape. This phase ensures the agent we build solves the right problem, not the most technically interesting one.",
     activities: [
-      "Stakeholder interviews — claims, underwriting, IT, compliance",
+      "Stakeholder interviews: claims, underwriting, IT, compliance",
       "As-is workflow mapping and pain point quantification",
       "Data availability and quality assessment",
       "Define scope: which decisions get automated, which stay human",
@@ -41,13 +41,13 @@ const phases = [
     colorClass: "bg-primary",
     duration: "Weeks 2–4",
     description:
-      "We design the agent architecture to fit your existing cloud, data, and model infrastructure — not the other way around. No vendor lock-in, no big-bang migrations.",
+      "We design the agent architecture to fit your existing cloud, data, and model infrastructure, not the other way around. No vendor lock-in, no big-bang migrations.",
     activities: [
-      "Agent topology design — single agent vs. multi-agent orchestration",
+      "Agent topology design: single agent vs. multi-agent orchestration",
       "Tool and API integration mapping (policy systems, CRM, data platforms)",
       "LLM selection and evaluation for the specific task",
       "Data pipeline design (ingestion, transformation, retrieval)",
-      "Human-in-the-loop design — escalation rules and review interfaces",
+      "Human-in-the-loop design: escalation rules and review interfaces",
       "Observability and guardrail architecture",
     ],
     outputs: [
@@ -63,18 +63,18 @@ const phases = [
     colorClass: "bg-accent",
     duration: "Weeks 4–10",
     description:
-      "Iterative agent development with continuous evaluation against real insurance data. We measure accuracy, reliability, and edge-case handling — not just happy-path demos.",
+      "Iterative agent development with continuous evaluation against real insurance data. We measure accuracy, reliability, and edge-case handling, not just happy-path demos.",
     activities: [
       "Agent development with your framework of choice (LangGraph, AutoGen, custom)",
       "Prompt engineering and iterative refinement against domain data",
-      "Evaluation harness setup — automated test suites for agent behaviour",
-      "Integration build — connecting agents to your existing systems",
-      "Failure mode testing — adversarial inputs, data gaps, edge cases",
+      "Evaluation harness setup: automated test suites for agent behaviour",
+      "Integration build: connecting agents to your existing systems",
+      "Failure mode testing: adversarial inputs, data gaps, edge cases",
       "Performance benchmarking against your defined success metrics",
     ],
     outputs: [
       "Functional agent with integration connectors",
-      "Evaluation report — accuracy, coverage, failure modes",
+      "Evaluation report: accuracy, coverage, failure modes",
       "Test suite for regression testing",
       "Integration documentation",
     ],
@@ -85,11 +85,11 @@ const phases = [
     colorClass: "bg-primary",
     duration: "Weeks 10–14",
     description:
-      "Production deployment is not the end — it's the start of a governed, monitored system. We ensure your agent operates safely within your infrastructure, with full observability.",
+      "Production deployment is not the end. It is the start of a governed, monitored system. We ensure your agent operates safely within your infrastructure, with full observability.",
     activities: [
-      "Staged rollout — shadow mode → limited production → full deployment",
+      "Staged rollout: shadow mode, limited production, full deployment",
       "Observability configuration (LLM traces, latency, error rates, drift)",
-      "Guardrail implementation — input/output validation, confidence thresholds",
+      "Guardrail implementation: input/output validation, confidence thresholds",
       "Human review workflow integration",
       "Runbook creation for operational teams",
       "Compliance documentation for audit readiness",
@@ -111,10 +111,10 @@ const phases = [
     activities: [
       "Continuous performance monitoring against baseline metrics",
       "Data drift detection and model freshness assessment",
-      "Human feedback loop integration — reviewing escalated cases",
+      "Human feedback loop integration: reviewing escalated cases",
       "Periodic evaluation against new test cases",
       "Prompt and instruction updates as business rules evolve",
-      "Cost optimisation — token efficiency, caching, model routing",
+      "Cost optimisation: token efficiency, caching, model routing",
     ],
     outputs: [
       "Monthly performance reports",
@@ -130,7 +130,7 @@ const principles = [
   { title: "Fit-to-Stack, Not Rip-and-Replace", body: "We architect around your existing cloud, data platform, and model infrastructure. No forced migrations, no lock-in." },
   { title: "Evaluation Before Deployment", body: "Agents are evaluated against real insurance data and adversarial scenarios before they touch production." },
   { title: "Observability as a First-Class Requirement", body: "Every agent ships with traces, metrics, and alerting. You know what the agent is doing, why, and when it's drifting." },
-  { title: "Regulatory Defensibility", body: "Every decision is logged, explainable, and traceable — meeting GDPR, Solvency II, and IDD documentation requirements." },
+  { title: "Regulatory Defensibility", body: "Every decision is logged, explainable, and traceable, meeting GDPR, Solvency II, IDD, and EU AI Act high-risk AI system requirements." },
   { title: "Iterative, Not Waterfall", body: "We deliver working agents in iterations. You see running software within weeks, not slide decks after 6 months." },
 ];
 
@@ -151,7 +151,7 @@ export default function AgenticLifecyclePage() {
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed animate-fade-in-up [animation-delay:200ms]">
             A structured, repeatable process for taking Agentic AI from business
-            problem to production — without the typical AI project pitfalls.
+            problem to production, without the typical AI project pitfalls.
           </p>
         </div>
       </section>

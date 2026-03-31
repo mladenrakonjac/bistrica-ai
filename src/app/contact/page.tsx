@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Get in Touch — Bistrica.AI",
+  title: "Get in Touch | Bistrica.AI",
   description:
     "Tell us about your infrastructure, data platform, and AI goals. We review every submission and follow up with a concrete technical perspective.",
 };
@@ -28,7 +28,7 @@ export default function ContactPage() {
           </h1>
           <p className="text-muted-foreground text-base leading-relaxed max-w-xl mx-auto">
             We don&apos;t do generic sales calls. Fill in this form and we&apos;ll
-            review your infrastructure, use case context, and AI maturity —
+            review your infrastructure, use case context, and AI maturity,
             then come back with a specific, relevant perspective.
           </p>
         </div>

@@ -311,7 +311,7 @@ export default function ContactForm() {
         <div className="space-y-6">
           <Field label="Have you previously deployed Agentic AI use cases?" required>
             <ToggleGroup
-              options={[{ value: "no", label: "No" }, { value: "poc", label: "PoC / Pilot only" }, { value: "yes", label: "Yes — in production" }]}
+              options={[{ value: "no", label: "No" }, { value: "poc", label: "PoC / Pilot only" }, { value: "yes", label: "Yes, in production" }]}
               value={form.hasAgenticExperience} onChange={(v) => set("hasAgenticExperience", v)}
             />
           </Field>
@@ -323,7 +323,7 @@ export default function ContactForm() {
           <Separator />
           <Field label="AI / LLM models used or being evaluated" hint="Select all that apply">
             <CheckboxGroup
-              options={["OpenAI GPT-4o / GPT-4","Azure OpenAI Service","Anthropic Claude","Google Gemini","Meta Llama (open source)","Mistral","Amazon Bedrock models","No AI models yet"]}
+              options={["Azure OpenAI Service (GPT-4o / o-series)","Anthropic Claude (via API or AWS Bedrock)","Google Gemini (via Vertex AI or API)","Meta Llama (open source / self-hosted)","Mistral","Amazon Bedrock (managed models)","On-premises / air-gapped models","No AI models yet"]}
               selected={form.aiModelsUsed} onChange={(v) => set("aiModelsUsed", v)}
               otherValue={form.aiModelsOther} onOtherChange={(v) => set("aiModelsOther", v)}
               otherPlaceholder="Other model(s)"

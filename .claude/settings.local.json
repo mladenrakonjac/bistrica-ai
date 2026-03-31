@@ -19,7 +19,8 @@
       "Bash(vercel inspect:*)",
       "Bash(git -C /Users/mladenairm/Documents/workstation/bistrica.ai rev-parse --short HEAD)",
       "Bash(vercel logs:*)",
-      "Bash(npx shadcn@latest add checkbox --yes)"
+      "Bash(npx shadcn@latest add checkbox --yes)",
+      "Bash(npx playwright:*)"
     ]
   },
   "enabledPlugins": {
